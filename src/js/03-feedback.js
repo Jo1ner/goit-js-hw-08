@@ -22,13 +22,13 @@ function onFormSubmit(evt) {
     if (email.value === "" || message.value.trim() === "") {
        return alert("Всі поля повинні бути заповнені");
     }
-  localStorage.removeItem(STORAGE_KEY);
     const text = {
     email: email.value,
     message: message.value
     }
   console.log(text);
-   evt.currentTarget.reset();
+  evt.currentTarget.reset();
+  localStorage.removeItem(STORAGE_KEY);
 }
  
 
@@ -40,6 +40,7 @@ function populateMessageOutput() {
     const savedMessage = localStorage.getItem(STORAGE_KEY);
     if (savedMessage) {
         messageInput.value = JSON.parse(savedMessage).message;
-        emailInput.value = JSON.parse(savedMessage).email;
+      emailInput.value = JSON.parse(savedMessage).email;
+      formData['email'] = emailInput.value;
     }
 }
